@@ -7,4 +7,15 @@ billingCycle.methods(['get', 'post', 'put', 'delete']);
 //unValidators: true  no run time da aplicacao os validadores sao acionados
 billingCycle.updateOptions({ new: true, runValidators: true });
 
+//funcao que retorna o cout para paginacao
+billingCycle.route('count', function(req, res, next) {
+  billingCycle.count(function(error, valor) {
+    if (error) {
+      res.status(500).json({ errors: [error] });
+    } else {
+      res.json({ valor });
+    }
+  });
+});
+
 module.exports = billingCycle;
